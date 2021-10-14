@@ -11,29 +11,30 @@ LABEL maintainer="aptalca"
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 
 RUN \
- echo "**** install runtime packages ****" && \
- apk add --no-cache --upgrade \
-	curl \
-	php7-ctype \
-	php7-curl \
-	php7-pdo_pgsql \
-	php7-pdo_sqlite \
-	php7-pdo_mysql \
-	php7-tokenizer \
-	php7-zip && \
- echo "**** install heimdall ****" && \
- mkdir -p \
-	/heimdall && \
- if [ -z ${HEIMDALL_RELEASE+x} ]; then \
-	HEIMDALL_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/Heimdall/releases/latest" \
-	| awk '/tag_name/{print $4;exit}' FS='[""]'); \
- fi && \
- curl -o \
- /heimdall/heimdall.tar.gz -L \
-	"https://github.com/linuxserver/Heimdall/archive/${HEIMDALL_RELEASE}.tar.gz" && \
- echo "**** cleanup ****" && \
- rm -rf \
-	/tmp/*
+  echo "**** install runtime packages ****" && \
+  apk add --no-cache --upgrade \
+    curl \
+    php7-ctype \
+    php7-curl \
+    php7-pdo_pgsql \
+    php7-pdo_sqlite \
+    php7-pdo_mysql \
+    php7-tokenizer \
+    php7-zip \
+    tar && \
+  echo "**** install heimdall ****" && \
+  mkdir -p \
+    /heimdall && \
+  if [ -z ${HEIMDALL_RELEASE+x} ]; then \
+    HEIMDALL_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/Heimdall/releases/latest" \
+    | awk '/tag_name/{print $4;exit}' FS='[""]'); \
+  fi && \
+  curl -o \
+    /heimdall/heimdall.tar.gz -L \
+    "https://github.com/linuxserver/Heimdall/archive/${HEIMDALL_RELEASE}.tar.gz" && \
+  echo "**** cleanup ****" && \
+  rm -rf \
+    /tmp/*
 
 # add local files
 COPY root/ /
