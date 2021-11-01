@@ -8,14 +8,14 @@ mkdir -p \
 
 # install heimdall if necessary
 [[ -f /heimdall/heimdall.tar.gz ]] && \
- echo "New container detected, installing Heimdall" && \
- tar xf \
-     /heimdall/heimdall.tar.gz -C \
-    /app/www --strip-components=1 && \
- echo -e '\n# Heimdall user authorization\nfastcgi_param  PHP_AUTH_USER $remote_user;\nfastcgi_param  PHP_AUTH_PW $http_authorization;' >> \
-    /etc/nginx/fastcgi_params && \
- rm -rf /heimdall && \
- chown -R abc:abc /app/www
+    echo "New container detected, installing Heimdall" && \
+    tar xf \
+        /heimdall/heimdall.tar.gz -C \
+        /app/www --strip-components=1 && \
+    echo -e '\n# Heimdall user authorization\nfastcgi_param  PHP_AUTH_USER $remote_user;\nfastcgi_param  PHP_AUTH_PW $http_authorization;' >> \
+        /etc/nginx/fastcgi_params && \
+    rm -rf /heimdall && \
+    chown -R abc:abc /app/www
 
 # create symlinks
 
@@ -40,9 +40,9 @@ done
 
 # copy .env if not exists
 [[ ! -f /config/www/.env ]] && \
-  cp /app/www/.env.example /config/www/.env && \
-  echo "Creating app key. This may take a while on slower systems" && \
-  php /app/www/artisan key:generate
+    cp /app/www/.env.example /config/www/.env && \
+    echo "Creating app key. This may take a while on slower systems" && \
+    php /app/www/artisan key:generate
 # set queue driver to database
 sed -i 's/QUEUE_DRIVER=sync/QUEUE_DRIVER=database/' /config/www/.env
 
