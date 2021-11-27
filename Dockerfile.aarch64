@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-alpine-nginx:arm64v8-3.14
+FROM ghcr.io/linuxserver/baseimage-alpine-nginx:arm64v8-3.15
 
 # set version label
 ARG BUILD_DATE
@@ -14,13 +14,13 @@ RUN \
   echo "**** install runtime packages ****" && \
   apk add --no-cache --upgrade \
     curl \
-    php7-ctype \
-    php7-curl \
-    php7-pdo_pgsql \
-    php7-pdo_sqlite \
-    php7-pdo_mysql \
-    php7-tokenizer \
-    php7-zip \
+    php8-ctype \
+    php8-curl \
+    php8-pdo_pgsql \
+    php8-pdo_sqlite \
+    php8-pdo_mysql \
+    php8-tokenizer \
+    php8-zip \
     tar && \
   echo "**** install heimdall ****" && \
   mkdir -p \
