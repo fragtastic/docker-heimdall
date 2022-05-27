@@ -12,7 +12,7 @@ mkdir -p \
  tar xf \
  	/heimdall/heimdall.tar.gz -C \
 	/var/www/localhost/heimdall --strip-components=1 && \
- echo -e '\n# Heimdall user authorization\nfastcgi_param  PHP_AUTH_USER $remote_user;\nfastcgi_param  PHP_AUTH_PW $http_authorization;' >> \
+ echo -e '\n# Heimdall user authorization\nfastcgi_param  PHP_AUTH_USER $remote_user;\nfastcgi_param  PHP_AUTH_PW $http_authorization;\nfastcgi_param  REMOTE_USER $http_remote_user;' >> \
 	/etc/nginx/fastcgi_params && \
  rm -rf /heimdall && \
  cp /var/www/localhost/heimdall/storage/app/searchproviders.yaml /var/www/localhost/heimdall/storage/app/searchproviders.yaml.orig && \
